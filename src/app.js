@@ -6,6 +6,8 @@ const express = require('express');
 const config = require('./config/env');
 const db = require('./config/db');
 const courseRoutes = require('./routes/courseRoutes');
+const studentRoutes = require('./routes/studentRoutes');
+
 
 const app = express();
 app.use(express.json());
@@ -16,6 +18,7 @@ async function startServer() {
     await db.connectRedis();
 
     app.use('/api/courses', courseRoutes);
+    app.use("/api/students", studentRoutes);
 
     app.listen(config.port, () => {
       console.log(`Server running on port ${config.port}`);
